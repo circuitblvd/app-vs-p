@@ -1,0 +1,92 @@
+****************NVMe-oF discover and connect***************
+nvme discover -t tcp -a 10.12.90.142 -s 4421
+
+Discovery Log Number of Records 4, Generation counter 9
+=====Discovery Log Entry 0======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  0
+trsvcid: 4420
+subnqn:  nqn.2016-06.io.spdk:cnode01
+traddr:  10.12.90.142
+=====Discovery Log Entry 1======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  1
+trsvcid: 4421
+subnqn:  nqn.2016-06.io.spdk:cnode23
+traddr:  10.12.90.142
+=====Discovery Log Entry 2======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  2
+trsvcid: 4422
+subnqn:  nqn.2016-06.io.spdk:cnode45
+traddr:  10.12.90.142
+=====Discovery Log Entry 3======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  3
+trsvcid: 4423
+subnqn:  nqn.2016-06.io.spdk:cnode67
+traddr:  10.12.90.142
+nvme connect -t tcp -n nqn.2016-06.io.spdk:cnode23 -a 10.12.90.142 -s 4421
+Node             SN                   Model                                    Namespace Usage                      Format           FW Rev  
+---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------
+/dev/nvme0n1     S3EWNX0J525464J      Samsung SSD 960 PRO 512GB                1         202.96  GB / 512.11  GB    512   B +  0 B   2B6QCXP7
+/dev/nvme1n1     SPDK00000000000001   SPDK bdev Controller                     1           1.61  GB /   1.61  GB      4 KiB +  0 B   19.04   
+
+### conf.txt ###########
+/dev/nvme2n1
+nqn.2016-06.io.spdk:cnode23
+########################
+
+**************NVMe-oF discover and connect done************
+
+****************Making filesystem********************
+mke2fs 1.44.4 (18-Aug-2018)
+/dev/nvme2n1 contains a ext4 file system
+	last mounted on /mnt/dev/nvme2n1 on Wed Apr 10 23:05:45 2019
+Creating filesystem with 393216 4k blocks and 98304 inodes
+Filesystem UUID: a1a4f28a-7731-487c-abfe-caaf63f95aad
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables:  0/12     done                            
+Writing inode tables:  0/12     done                            
+Creating journal (8192 blocks): done
+Writing superblocks and filesystem accounting information:  0/12     done
+
+Done!
+
+****************Mounting drive***********************
+Done!
+
+****************Copying movies and thumbnails****************
+***Movies copied****************
+170728_Berlin_A_006.mp4   Ballpark.mp4	      Track_and_Field_2.mp4
+171120_004.mp4		  SHM_4818.mp4	      Wakeboarding_on_the_Lake.mp4
+171124_A1_HD_013.mp4	  Sailboat_Maine.mp4  bikesilouhette.mp4
+171124_A1_HD_019.mp4	  Sequence_03.mp4     img
+4k_Skatepark_at_Dusk.mp4  Surfer1.mp4
+***Thumbnails copied************
+170728_Berlin_A_006.png   Ballpark.png	      Track_and_Field_2.png
+171120_004.png		  SHM_4818.png	      Wakeboarding_on_the_Lake.png
+171124_A1_HD_013.png	  Sailboat_Maine.png  bikesilouhette.png
+171124_A1_HD_019.png	  Sequence_03.png
+4k_Skatepark_at_Dusk.png  Surfer1.png
+Done!
+
+****************Making html dirs and files****************
+Done!
+
+****************Launching nginx****************
+10.12.90.111:8086 rtmp:1941

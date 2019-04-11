@@ -1,0 +1,108 @@
+****************NVMe-oF discover and connect***************
+nvme discover -t tcp -a 10.12.90.142 -s 4420
+
+Discovery Log Number of Records 4, Generation counter 9
+=====Discovery Log Entry 0======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  0
+trsvcid: 4420
+subnqn:  nqn.2016-06.io.spdk:cnode01
+traddr:  10.12.90.142
+=====Discovery Log Entry 1======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  1
+trsvcid: 4421
+subnqn:  nqn.2016-06.io.spdk:cnode23
+traddr:  10.12.90.142
+=====Discovery Log Entry 2======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  2
+trsvcid: 4422
+subnqn:  nqn.2016-06.io.spdk:cnode45
+traddr:  10.12.90.142
+=====Discovery Log Entry 3======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  3
+trsvcid: 4423
+subnqn:  nqn.2016-06.io.spdk:cnode67
+traddr:  10.12.90.142
+nvme connect -t tcp -n nqn.2016-06.io.spdk:cnode01 -a 10.12.90.142 -s 4420
+Node             SN                   Model                                    Namespace Usage                      Format           FW Rev  
+---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------
+/dev/nvme0n1     S3EWNX0J525464J      Samsung SSD 960 PRO 512GB                1         202.96  GB / 512.11  GB    512   B +  0 B   2B6QCXP7
+
+### conf.txt ###########
+/dev/nvme1n1
+nqn.2016-06.io.spdk:cnode01
+########################
+
+**************NVMe-oF discover and connect done************
+
+****************Making filesystem********************
+mke2fs 1.44.4 (18-Aug-2018)
+/dev/nvme1n1 contains a ext4 file system
+	last mounted on /mnt/dev/nvme1n1 on Wed Apr 10 23:05:25 2019
+Creating filesystem with 393216 4k blocks and 98304 inodes
+Filesystem UUID: 56dce927-9160-4120-9fe1-7d7f73841fa0
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912
+
+Allocating group tables:  0/12     done                            
+Writing inode tables:  0/12     done                            
+Creating journal (8192 blocks): done
+Writing superblocks and filesystem accounting information:  0/1210/12     done
+
+Done!
+
+****************Mounting drive***********************
+Done!
+
+****************Copying movies and thumbnails****************
+***Movies copied****************
+160820_313_NYC_USAFlag19_1080p.mp4
+160929_044_London_BigBen2_1080p.mp4
+160929_045_London_BigBen3_1080p.mp4
+160929_106_London_WaterlooStationTimeLapse2_1080p.mp4
+170422A_002_SlowMoStatue_1080p.mp4
+170422B_016_Florence_1080P.mp4
+170422B_046_Florence_1080P.mp4
+170422B_062_LeaningTowerPisa_1080P.mp4
+170609_C_Agra_110.mp4
+Milan_Cathedral_CCBY_NatureClip.mp4
+a19.mp4
+a47a.mp4
+harbour.mp4
+img
+***Thumbnails copied************
+160820_313_NYC_USAFlag19_1080p.png
+160929_044_London_BigBen2_1080p.png
+160929_045_London_BigBen3_1080p.png
+160929_106_London_WaterlooStationTimeLapse2_1080p.png
+170422A_002_SlowMoStatue_1080p.png
+170422B_016_Florence_1080P.png
+170422B_046_Florence_1080P.png
+170422B_062_LeaningTowerPisa_1080P.png
+170609_C_Agra_110.png
+Milan_Cathedral_CCBY_NatureClip.png
+a19.png
+a47a.png
+harbour.png
+Done!
+
+****************Making html dirs and files****************
+Done!
+
+****************Launching nginx****************
+10.12.90.111:8085 rtmp:1940

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+# when run from docker command line
+# docker run --privileged -it -v /dev:/dev -e TP=tcp -e TIP=10.12.90.142 -e TPORT=4420 -e TNQN=nqn.2016-06.io.spdk:cnode01 -e SN=SPDK00000000000001 -e IDX=1 app-vs-p
+
+#parameters to this Docker
+tp=$TP
+tip=$TIP
+tport=$TPORT
+tnqn=$TNQN
+sn=$SN
+idx=$IDX
+mp4src="/mp4-"$idx
+vididx=$idx
+nginx_port=$((8080 + $idx))
+rtmp_port=$((1935 + $idx))
+
+echo "****************NVMe-oF discover and connect***************"
+echo "nvme discover -t $tp -a "$tip" -s "$tport
+nvme discover -t $tp -a $tip -s $tport
+echo "nvme connect -t $tp -n "$tnqn" -a "$tip" -s "$tport
+nvme connect -t $tp -n $tnqn -a $tip -s $tport
+
+nvme list
+export m=$(nvme list | grep $sn | cut -d' ' -f1)
+
+echo $m > /conf.txt
+echo $tnqn >> /conf.txt
+echo
+echo "### conf.txt ###########"
+cat /conf.txt
+echo "########################"
+
+echo
+echo "**************NVMe-oF discover and connect done************"
+
+echo
+echo "****************Making filesystem********************"
+mkfs.ext4 -F $m
+echo "Done!"
+
+echo
+echo "****************Mounting drive***********************"
+mkdir -p /mnt/$m
+mount $m /mnt/$m
+echo "Done!"
+
+#copy movies and thumbnails from a movie depot. We assume it is /tmp/mm in this example
+echo
+echo "****************Copying movies and thumbnails****************"
+mkdir -p /mnt/$m/mp4/
+cp -r /tmp/mm/$mp4src/* /mnt/$m/mp4/
+echo "***Movies copied****************"
+ls /tmp/mm/$mp4src/
+echo "***Thumbnails copied************"
+ls /tmp/mm/$mp4src/img/
+echo "Done!"
+
+echo
+echo "****************Making html dirs and files****************"
+ln -s /mnt$m/mp4/ /var/www/html/mp4s
+cp /var/www/html/js/advanced-$vididx.js /var/www/html/js/advanced.js 
+echo "Done!"
+
+echo
+echo "****************Launching nginx****************"
+ip_addr=$(ifconfig | grep "10.12.90" | awk '{print $2}')
+echo $ip_addr":"$nginx_port" rtmp:"$rtmp_port
+sed -i "s/8080/$nginx_port/" /usr/local/nginx/conf/nginx.conf
+sed -i "s/1935/$rtmp_port/" /usr/local/nginx/conf/nginx.conf
+
+# start nginx web server
+/usr/local/nginx/sbin/nginx
+
+sleep infinity

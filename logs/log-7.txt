@@ -1,0 +1,91 @@
+****************NVMe-oF discover and connect***************
+nvme discover -t tcp -a 10.12.90.142 -s 4422
+
+Discovery Log Number of Records 4, Generation counter 9
+=====Discovery Log Entry 0======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  0
+trsvcid: 4420
+subnqn:  nqn.2016-06.io.spdk:cnode01
+traddr:  10.12.90.142
+=====Discovery Log Entry 1======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  1
+trsvcid: 4421
+subnqn:  nqn.2016-06.io.spdk:cnode23
+traddr:  10.12.90.142
+=====Discovery Log Entry 2======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  2
+trsvcid: 4422
+subnqn:  nqn.2016-06.io.spdk:cnode45
+traddr:  10.12.90.142
+=====Discovery Log Entry 3======
+trtype:  unrecognized
+adrfam:  ipv4
+subtype: nvme subsystem
+treq:    not specified
+portid:  3
+trsvcid: 4423
+subnqn:  nqn.2016-06.io.spdk:cnode67
+traddr:  10.12.90.142
+nvme connect -t tcp -n nqn.2016-06.io.spdk:cnode0145 -a 10.12.90.142 -s 4422
+Failed to write to /dev/nvme-fabrics: Input/output error
+Node             SN                   Model                                    Namespace Usage                      Format           FW Rev  
+---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------
+/dev/nvme0n1     S3EWNX0J525464J      Samsung SSD 960 PRO 512GB                1         202.96  GB / 512.11  GB    512   B +  0 B   2B6QCXP7
+/dev/nvme1n1     SPDK00000000000001   SPDK bdev Controller                     1           1.61  GB /   1.61  GB      4 KiB +  0 B   19.04   
+/dev/nvme2n1     SPDK00000000000023   SPDK bdev Controller                     1           1.61  GB /   1.61  GB      4 KiB +  0 B   19.04   
+
+### conf.txt ###########
+
+nqn.2016-06.io.spdk:cnode0145
+########################
+
+**************NVMe-oF discover and connect done************
+
+****************Making filesystem********************
+Usage: mkfs.ext4 [-c|-l filename] [-b block-size] [-C cluster-size]
+	[-i bytes-per-inode] [-I inode-size] [-J journal-options]
+	[-G flex-group-size] [-N number-of-inodes] [-d root-directory]
+	[-m reserved-blocks-percentage] [-o creator-os]
+	[-g blocks-per-group] [-L volume-label] [-M last-mounted-directory]
+	[-O feature[,...]] [-r fs-revision] [-E extended-option[,...]]
+	[-t fs-type] [-T usage-type ] [-U UUID] [-e errors_behavior][-z undo_file]
+	[-jnqvDFSV] device [blocks-count]
+Done!
+
+****************Mounting drive***********************
+mount: /mnt/: can't find in /etc/fstab.
+Done!
+
+****************Copying movies and thumbnails****************
+***Movies copied****************
+160825_09_Grapevines4_1080p.mp4  Beer_Pour_Videvo.mp4
+170509A_Vietnam_08.mp4		 Chocolate.mp4
+170804_A_Lombok_005.mp4		 Coffee_Beans_Wide_Pour.mp4
+170804_B_Lombok_087.mp4		 img
+Baking_Cookies_Alt.mp4		 wine_pouring_in_slowmotion1.mp4
+Barbecue_1.mp4
+***Thumbnails copied************
+160825_09_Grapevines4_1080p.png  Barbecue_1.png
+170509A_Vietnam_08.png		 Beer_Pour_Videvo.png
+170804_A_Lombok_005.png		 Chocolate.png
+170804_B_Lombok_087.png		 Coffee_Beans_Wide_Pour.png
+Baking_Cookies_Alt.png		 wine_pouring_in_slowmotion1.png
+Done!
+
+****************Making html dirs and files****************
+Done!
+
+****************Launching nginx****************
+10.12.90.111:8087 rtmp:1942

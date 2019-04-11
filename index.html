@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Cinabro Video Server</title>
+  <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
+  <link href="dist/videojs-playlist-ui.css" rel="stylesheet">
+  <link href="/css/example2.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+</head>
+
+<body>
+  <section class="main-preview-player">
+    <video id="preview-player" class="video-js vjs-fluid" data-setup='{"controls": true, "autoplay": true, "preload": "auto", "loop": false, "aspectRatio": "24:10", "muted": true, "crossorigin": "anonymous"}'>
+      <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    </video>
+
+    <div class="playlist-container  preview-player-dimensions vjs-fluid">
+      <ol class="vjs-playlist"></ol>
+    </div>
+  </section>
+
+  <script src="node_modules/video.js/dist/video.js"></script>
+  <script src="node_modules/videojs-playlist/dist/videojs-playlist.js"></script>
+  <script src="dist/videojs-playlist-ui.js"></script>
+  <script src="js/advanced.js"></script>
+</body>
+</html>
